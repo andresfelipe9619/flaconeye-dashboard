@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider";
 
 export default function ReportCard({
   title,
+  titleColor,
   percentage,
   accumulated,
   currentValue,
@@ -16,51 +17,67 @@ export default function ReportCard({
   const classes = useStyles();
   return (
     <Card className={classes.card}>
-      <CardContent>
+      <CardContent className={classes.cardContent}>
         <Grid container>
-          <Grid item md={12} className={classes.titleBox}>
-            <Typography
-              align="left"
-              gutterBottom
-              className={classes.title}
-            >
+          <Grid
+            item
+            md={12}
+            style={{ backgroundColor: titleColor }}
+            className={classes.titleBox}
+          >
+            <Typography align="left" gutterBottom className={classes.title}>
               {title}
             </Typography>
-            <Divider variant="fullWidth" />
           </Grid>
-          <Grid container item md={12} alignItems="center" spacing={2}>
-            <Grid item md={5} alignItems="center" className={classes.accBox}>
-              <Typography
-                variant="caption"
-                color="textSecondary"
-                align="center"
-                gutterBottom
-              >
-                {isNaN(percentage) ? `Hasta ${currentDate}` : "Acumuladas"}
-              </Typography>
-              <Typography color="textSecondary" align="center" gutterBottom>
+          <Grid
+            item
+            md={12}
+            container
+            spacing={2}
+            alignItems="center"
+            className={classes.container}
+          >
+            <Grid
+              item
+              md={6}
+              container
+              justify="center"
+              direction="column"
+              alignItems="center"
+              className={classes.accBox}
+            >
+              <Typography variant="h5" gutterBottom>
                 {accumulated}
               </Typography>
+              <Typography variant="caption" color="textSecondary" gutterBottom>
+                {isNaN(percentage) ? `Hasta ${currentDate}` : "Acumuladas"}
+              </Typography>
             </Grid>
-            <Grid container item md={7}>
-              <Grid item md={12} className={classes.borderBox}>
-                <Typography color="textSecondary" align="center" gutterBottom>
+            <Grid container item md={6}>
+              <Grid
+                item
+                md={12}
+                container
+                justify="center"
+                className={classes.borderBox}
+              >
+                <Typography
+                  color="textSecondary"
+                  variant="caption"
+                  gutterBottom
+                >
                   {currentDate}
                 </Typography>
               </Grid>
               <Grid item md={12} container>
                 {isNaN(percentage) ? (
-                  <Grid item md={6}>
-                    <Typography
-                      color="textSecondary"
-                      align="center"
-                      gutterBottom
-                    >
-                      {currentValue}
-                    </Typography>
+                  <Grid container justify="center">
+                    <Typography gutterBottom>{currentValue}</Typography>
                   </Grid>
                 ) : (
-                  <PercentageBlock {...{ classes, currentValue, percentage }} />
+                  <PercentageBlock
+                    {...{ titleColor, currentValue, percentage }}
+                  />
                 )}
               </Grid>
             </Grid>
@@ -71,15 +88,15 @@ export default function ReportCard({
   );
 }
 
-const PercentageBlock = ({ classes, currentValue, percentage }) => (
+const PercentageBlock = ({ titleColor, currentValue, percentage }) => (
   <>
-    <Grid item md={6} className={classes.accBox}>
-      <Typography color="textSecondary" align="center" gutterBottom>
+    <Grid item md={6}>
+      <Typography align="center" gutterBottom>
         {currentValue}
       </Typography>
     </Grid>
     <Grid item md={6}>
-      <Typography color="textSecondary" align="right" gutterBottom>
+      <Typography style={{ color: titleColor }} align="right" gutterBottom>
         {percentage}%
       </Typography>
     </Grid>
@@ -91,14 +108,20 @@ const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 275,
   },
+  cardContent: {
+    padding: 0,
+  },
+  container: { padding: 10, height: "100%" },
   title: {
     fontWeight: "bold",
+    color: "white",
+    padding: [[4, 10]],
   },
   titleBox: { marginBottom: 10 },
   accBox: {
     borderRight: borderStyle(theme),
   },
   borderBox: {
-    borderBottom: borderStyle(theme),
+    marginBottom: 10,
   },
 }));

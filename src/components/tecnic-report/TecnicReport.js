@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from "react";
 import {
-  XYPlot,
   XAxis,
   YAxis,
   HorizontalGridLines,
   VerticalGridLines,
   LineSeries,
   LineMarkSeries,
-  Crosshair,
   FlexibleWidthXYPlot,
   DiscreteColorLegend,
 } from "react-vis";
 import ReportCard from "../report-card/ReportCard";
 import MostVisitedCard from "../report-card/MostVisitedCard";
 import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 export default function TecnicReport(props) {
   const { getData } = props;
   const [data, setData] = useState({});
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
-      let result = await getData();
-      setData(result);
+      try {
+        let result = await getData();
+        setData(result);
+      } catch (error) {
+        console.log("error", error);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
-
+  const colors = ["#5cb860", "#ffa21a", "#f55a4e", "#00d3ee"];
+  if (loading) return <LinearProgress />;
   return (
     <Grid container spacing={3}>
-      <Typography variant="h5" component="h1">
-        Tecnic Report
-        <Divider variant="fullWidth" />
-      </Typography>
       <Grid container spacing={6} item md={12}>
         {(data.kpi || []).map(
           (
@@ -48,6 +48,7 @@ export default function TecnicReport(props) {
                   accumulated,
                   currentValue,
                   currentDate,
+                  titleColor: colors[index <= 3 ? index : index - 4],
                 }}
               />
             </Grid>
@@ -62,15 +63,15 @@ export default function TecnicReport(props) {
         }}
       >
         <Grid container justify="center" item md={10}>
-          <FlexibleWidthXYPlot animation height={400}>
+          <FlexibleWidthXYPlot animation height={400} xType="ordinal">
             <HorizontalGridLines />
             <VerticalGridLines />
-            <XAxis tickLabelAngle={-45} />
+            <XAxis />
             <YAxis />
-            <LineSeries data={chartDataA} />
-            <LineSeries data={chartDataB} />
-            <LineSeries data={chartDataC} />
-            <LineSeries data={chartDataD} />
+            <LineMarkSeries data={chartDataA} />
+            <LineMarkSeries data={chartDataB} />
+            <LineMarkSeries data={chartDataC} />
+            <LineMarkSeries data={chartDataD} />
           </FlexibleWidthXYPlot>
         </Grid>
         <Grid container justify="center" item md={2}>
@@ -88,54 +89,54 @@ export default function TecnicReport(props) {
 }
 
 const chartDataA = [
-  { x: 1, y: 2 },
-  { x: 2, y: 4 },
-  { x: 3, y: 5 },
-  { x: 4, y: 9 },
-  { x: 5, y: 13 },
-  { x: 6, y: 14 },
-  { x: 7, y: 15 },
-  { x: 8, y: 18 },
-  { x: 9, y: 20 },
-  { x: 10, y: 22 },
-  { x: 11, y: 27 },
+  { x: "may-19", y: 2 },
+  { x: "jun-19", y: 4 },
+  { x: "jul-19", y: 5 },
+  { x: "ago-19", y: 9 },
+  { x: "sep-19", y: 13 },
+  { x: "oct-19", y: 14 },
+  { x: "nov-19", y: 15 },
+  { x: "dic-19", y: 18 },
+  { x: "ene-20", y: 20 },
+  { x: "feb-20", y: 22 },
+  { x: "mar-20", y: 27 },
 ];
 const chartDataB = [
-  { x: 1, y: 0 },
-  { x: 2, y: 0 },
-  { x: 3, y: 0 },
-  { x: 4, y: 1 },
-  { x: 5, y: 1 },
-  { x: 6, y: 3 },
-  { x: 7, y: 5 },
-  { x: 8, y: 8 },
-  { x: 9, y: 10 },
-  { x: 10, y: 11 },
-  { x: 11, y: 11 },
+  { x: "may-19", y: 0 },
+  { x: "jun-19", y: 0 },
+  { x: "jul-19", y: 0 },
+  { x: "ago-19", y: 1 },
+  { x: "sep-19", y: 1 },
+  { x: "oct-19", y: 3 },
+  { x: "nov-19", y: 5 },
+  { x: "dic-19", y: 8 },
+  { x: "ene-20", y: 10 },
+  { x: "feb-20", y: 11 },
+  { x: "mar-20", y: 11 },
 ];
 const chartDataC = [
-  { x: 1, y: 2 },
-  { x: 2, y: 5 },
-  { x: 3, y: 8 },
-  { x: 4, y: 10 },
-  { x: 5, y: 12 },
-  { x: 6, y: 14 },
-  { x: 7, y: 15 },
-  { x: 8, y: 15 },
-  { x: 9, y: 19 },
-  { x: 10, y: 21 },
-  { x: 11, y: 22 },
+  { x: "may-19", y: 2 },
+  { x: "jun-19", y: 5 },
+  { x: "jul-19", y: 8 },
+  { x: "ago-19", y: 10 },
+  { x: "sep-19", y: 12 },
+  { x: "oct-19", y: 14 },
+  { x: "nov-19", y: 15 },
+  { x: "dic-19", y: 15 },
+  { x: "ene-20", y: 19 },
+  { x: "feb-20", y: 21 },
+  { x: "mar-20", y: 22 },
 ];
 const chartDataD = [
-  { x: 1, y: 4 },
-  { x: 2, y: 9 },
-  { x: 3, y: 13 },
-  { x: 4, y: 20 },
-  { x: 5, y: 26 },
-  { x: 6, y: 31 },
-  { x: 7, y: 35 },
-  { x: 8, y: 41 },
-  { x: 9, y: 49 },
-  { x: 10, y: 54 },
-  { x: 11, y: 60 },
+  { x: "may-19", y: 4 },
+  { x: "jun-19", y: 9 },
+  { x: "jul-19", y: 13 },
+  { x: "ago-19", y: 20 },
+  { x: "sep-19", y: 26 },
+  { x: "oct-19", y: 31 },
+  { x: "nov-19", y: 35 },
+  { x: "dic-19", y: 41 },
+  { x: "ene-20", y: 49 },
+  { x: "feb-20", y: 54 },
+  { x: "mar-20", y: 60 },
 ];
