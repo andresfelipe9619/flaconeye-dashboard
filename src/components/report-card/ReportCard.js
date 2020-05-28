@@ -4,7 +4,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Divider from "@material-ui/core/Divider";
 
 export default function ReportCard({
   title,
@@ -16,7 +15,7 @@ export default function ReportCard({
 }) {
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardContent className={classes.cardContent}>
         <Grid container>
           <Grid
@@ -49,7 +48,12 @@ export default function ReportCard({
               <Typography variant="h5" gutterBottom>
                 {accumulated}
               </Typography>
-              <Typography variant="caption" color="textSecondary" gutterBottom>
+              <Typography
+                variant="caption"
+                style={{ fontSize: 14 }}
+                color="textSecondary"
+                gutterBottom
+              >
                 {isNaN(percentage) ? `Hasta ${currentDate}` : "Acumuladas"}
               </Typography>
             </Grid>
@@ -61,11 +65,7 @@ export default function ReportCard({
                 justify="center"
                 className={classes.borderBox}
               >
-                <Typography
-                  color="textSecondary"
-                  variant="caption"
-                  gutterBottom
-                >
+                <Typography color="textSecondary" variant="body1" gutterBottom>
                   {currentDate}
                 </Typography>
               </Grid>
@@ -91,12 +91,17 @@ export default function ReportCard({
 const PercentageBlock = ({ titleColor, currentValue, percentage }) => (
   <>
     <Grid item md={6}>
-      <Typography align="center" gutterBottom>
+      <Typography variant="h6" align="center" gutterBottom>
         {currentValue}
       </Typography>
     </Grid>
     <Grid item md={6}>
-      <Typography style={{ color: titleColor }} align="right" gutterBottom>
+      <Typography
+        variant="h6"
+        style={{ color: titleColor, fontWeight: "bold" }}
+        align="right"
+        gutterBottom
+      >
         {percentage}%
       </Typography>
     </Grid>

@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import { Typography, LinearProgress } from "@material-ui/core";
-import { formatToUnits } from "../../utils";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import EconomicReport from "../economic-report/EconomicReport";
 import TecnicReport from "../tecnic-report/TecnicReport";
+import NewTecnicReport from "../tecnic-report/NewTecnicReport";
 import "react-vis/dist/style.css";
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -34,6 +31,12 @@ export default function Dashboard() {
         path="/tecnic"
         render={(props) => (
           <TecnicReport getData={getTecnicReport} {...props} />
+        )}
+      />
+      <Route
+        path="/tecnic_new"
+        render={(props) => (
+          <NewTecnicReport getData={getTecnicReport} {...props} />
         )}
       />
     </Switch>

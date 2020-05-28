@@ -41,9 +41,19 @@ export default function App() {
       path: "/tecnic"
     },
     {
+      icon: <AssessmentIcon />,
+      text: "Técnico Nuevo",
+      path: "/tecnic_new"
+    },
+    {
       icon: <MonetizationOnIcon />,
       text: "Económico",
       path: "/economic"
+    },
+    {
+      icon: <MonetizationOnIcon />,
+      text: "Económico New",
+      path: "/economic_new"
     }
   ];
   return (

@@ -9,11 +9,11 @@ export default function MostVisitedCard({ data }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardContent>
         <Grid container item md={12} alignItems="center">
           <Grid item md={4}>
-            <Typography align="center" gutterBottom>
+            <Typography className={classes.bold} align="center" variant="h6" gutterBottom>
               Ubicación más visitada
             </Typography>
           </Grid>
@@ -37,7 +37,7 @@ export default function MostVisitedCard({ data }) {
                   </Typography>
                 </Grid>
                 <Grid item md={4}>
-                  <Typography color="textSecondary" align="center" gutterBottom>
+                  <Typography className={classes.bold} color="textSecondary" align="center" gutterBottom>
                     {total}
                   </Typography>
                 </Grid>
@@ -53,6 +53,7 @@ export default function MostVisitedCard({ data }) {
 const borderStyle = (theme) => [[1, "solid", theme.palette.divider]];
 const useStyles = makeStyles((theme) => ({
   card: { minWidth: "100%" },
+  bold :{fontWeight: "bold"},
   borderBox: {
     borderBottom: borderStyle(theme),
   },
