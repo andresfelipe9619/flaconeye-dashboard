@@ -4,6 +4,8 @@ import MostVisitedCard from "../report-card/MostVisitedCard";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import TecnicChart from "./TecnicChart";
+import lineData from './data';
+
 export default function TecnicReport(props) {
   const { getData } = props;
   const [data, setData] = useState({});
@@ -54,7 +56,7 @@ export default function TecnicReport(props) {
           )
         )}
       </Grid>
-      <TecnicChart />
+      <TecnicChart data={lineData} />
       <Grid container item md={8} alignItems="center" justify="center">
         <MostVisitedCard data={data.mostVisited || []} />
       </Grid>

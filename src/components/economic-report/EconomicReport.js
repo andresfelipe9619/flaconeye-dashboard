@@ -4,10 +4,15 @@ import MostVisitedCard from "../report-card/MostVisitedCard";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import TecnicChart from "../tecnic-report/TecnicChart";
+import HorizontalBarChart from "../horizontal-bar/HorizontalBarChart";
+import barData from "../horizontal-bar/data";
+import lineData from '../tecnic-report/data';
+
 export default function TecnicReport(props) {
   const { getData } = props;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
+  const barKeys = ["contratado", "ejecutado"];
   useEffect(() => {
     (async () => {
       try {
@@ -54,9 +59,14 @@ export default function TecnicReport(props) {
           )
         )}
       </Grid>
-      <TecnicChart />
-      <Grid container item md={8} alignItems="center" justify="center">
-        <MostVisitedCard data={data.mostVisited || []} />
+      <TecnicChart data={lineData} />
+      <Grid container item md={12} alignItems="center" justify="center">
+        <Grid item md={8}>
+          <HorizontalBarChart data={barData} keys={barKeys} />
+        </Grid>
+        <Grid item md={4}>
+          <MostVisitedCard data={data.mostVisited || []} />
+        </Grid>
       </Grid>
     </Grid>
   );

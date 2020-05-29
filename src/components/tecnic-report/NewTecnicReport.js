@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import AssistsRanking from "./AssistsRanking";
+import lineData from "./data";
 export default function NewTecnicReport(props) {
   const { getData } = props;
   const [data, setData] = useState({});
@@ -59,12 +60,15 @@ export default function NewTecnicReport(props) {
           )
         )}
       </Grid>
-      <TecnicChart style={{ marginLeft: 15, marginRight: 25 }} />
+      <TecnicChart
+        style={{ marginLeft: 15, marginRight: 25 }}
+        data={lineData}
+      />
       {/* <Typography variant="h3" style={numberStyle}>
         Rankings
       </Typography> */}
-      {rankings.map((title) => (
-        <Grid container item md={4}>
+      {rankings.map((title, i) => (
+        <Grid container item md={4} key={i}>
           <AssistsRanking />
           <Typography
             align="center"
