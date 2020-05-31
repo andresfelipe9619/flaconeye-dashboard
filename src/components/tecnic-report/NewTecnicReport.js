@@ -48,8 +48,19 @@ export default function NewTecnicReport(props) {
                 <Card raised>
                   <CardContent>
                     <CircularProgressBar
-                      squareSize={150}
-                      value={percentage}
+                      colors={{ con: "#f44336", pro: "#4caf50" }}
+                      data={[
+                        {
+                          id: "pro",
+                          label: proName,
+                          value: percentage,
+                        },
+                        {
+                          id: "con",
+                          label: conName,
+                          value: 100 - percentage,
+                        },
+                      ]}
                       text={`${percentage}%`}
                     />
                   </CardContent>
@@ -64,9 +75,11 @@ export default function NewTecnicReport(props) {
         style={{ marginLeft: 15, marginRight: 25 }}
         data={lineData}
       />
-      {/* <Typography variant="h3" style={numberStyle}>
-        Rankings
-      </Typography> */}
+      <Grid item md="12">
+        <Typography variant="h3" align="center" style={numberStyle}>
+          Ranking de Asistencias
+        </Typography>
+      </Grid>
       {rankings.map((title, i) => (
         <Grid container item md={4} key={i}>
           <AssistsRanking />
@@ -91,7 +104,7 @@ const DividedCard = ({ above, below, hasNumber, hasColors }) => (
           align="center"
           variant="h3"
           gutterBottom
-          style={{ ...titleStyle, ...(hasColors ? colorGreen : null) }}
+          style={{ ...titleStyle, ...(hasColors ? colorRed : null) }}
         >
           {above}
         </Typography>
@@ -104,7 +117,7 @@ const DividedCard = ({ above, below, hasNumber, hasColors }) => (
           <Typography
             align="center"
             variant="h3"
-            style={{ ...titleStyle, ...(hasColors ? colorRed : null) }}
+            style={{ ...titleStyle, ...(hasColors ? colorGreen : null) }}
           >
             {below}
           </Typography>

@@ -25,14 +25,13 @@ export default function TecnicChart({ style, data }) {
       style={{
         background: "white",
         marginTop: 25,
-
         ...style,
       }}
     >
       <Card raised style={{ width: "100%" }}>
         <div style={{ marginTop: "10px" }}>
           <Typography variant="h5" component="h1" align="center">
-            % Ejecución de Actividades
+           Cantidad de Asistencias
           </Typography>
         </div>
         <CardContent>
@@ -106,25 +105,6 @@ export default function TecnicChart({ style, data }) {
                 },
               ]}
             />
-            {/* <Grid item md={12}>
-              <FlexibleWidthXYPlot animation height={400} xType="ordinal">
-                <HorizontalGridLines />
-                <VerticalGridLines />
-                <XAxis />
-                <YAxis />
-                <LineMarkSeries data={chartDataA} />
-                <LineMarkSeries data={chartDataB} />
-                <LineMarkSeries data={chartDataC} />
-                <LineMarkSeries data={chartDataD} />
-              </FlexibleWidthXYPlot>
-            </Grid>
-            <Grid container justify="center" item md={12}>
-              <DiscreteColorLegend
-                orientation="horizontal"
-                width={400}
-                items={["Correctivo", "Preventivo", "Ingeniería", "Total"]}
-              />
-            </Grid> */}
           </Grid>
         </CardContent>
       </Card>
