@@ -4,7 +4,7 @@ import MostVisitedCard from "../report-card/MostVisitedCard";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import TecnicChart from "./TecnicChart";
-import lineData from './data';
+import lineData from "./data";
 
 export default function TecnicReport(props) {
   const { getData } = props;
@@ -21,6 +21,7 @@ export default function TecnicReport(props) {
         setLoading(false);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const colors = [
     "#009688",

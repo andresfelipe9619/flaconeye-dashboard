@@ -5,7 +5,6 @@ const margin = { top: 0, right: 50, bottom: 0, left: 50 };
 
 const styles = {
   root: {
-    fontFamily: "consolas, sans-serif",
     textAlign: "center",
     position: "relative",
     width: 300,

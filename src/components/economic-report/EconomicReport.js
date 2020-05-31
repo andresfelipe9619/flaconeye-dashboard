@@ -6,7 +6,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import TecnicChart from "../tecnic-report/TecnicChart";
 import HorizontalBarChart from "../horizontal-bar/HorizontalBarChart";
 import barData from "../horizontal-bar/data";
-import lineData from '../tecnic-report/data';
+import lineData from "../tecnic-report/data";
 
 export default function TecnicReport(props) {
   const { getData } = props;
@@ -24,6 +24,7 @@ export default function TecnicReport(props) {
         setLoading(false);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const colors = [
     "#009688",
