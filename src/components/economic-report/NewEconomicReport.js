@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import TecnicChart from "./TecnicChart";
 import CircularProgressBar from "../circular-progress/CircularProgressBar";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import AssistsRanking from "./AssistsRanking";
+import AssistsRanking from "../tecnic-report/AssistsRanking";
+import MarkedBarChart from "../mark-bar-chart/MarkedBarChart";
+import markBarData from "../mark-bar-chart/data";
 import assistData from "../economic-report/assistData";
-import lineData from "./data";
-export default function NewTecnicReport(props) {
+import { formatToUnits } from "../../utils";
+
+export default function NewEconomicReport(props) {
   const { getData } = props;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -29,8 +31,21 @@ export default function NewTecnicReport(props) {
 
   if (loading) return <LinearProgress />;
   return (
-    <Grid container spacing={4} justify="center">
-      <Grid container spacing={6} item md={12} justify="center">
+    <Grid container item md={12} spacing={3}>
+      <Grid container item md={5}>
+        {markBarData.map((item, i) => (
+          <Grid item md={12} key={i}>
+            <MarkedBarChart
+              data={item.indexes}
+              title={item.title}
+              color={item.color}
+              media={item.media}
+              keys={["value"]}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Grid container item md={7} spacing={5}>
         {reportData.map(
           (
             { percentage, pendingValue, pendingName, proName, conName },
@@ -38,7 +53,7 @@ export default function NewTecnicReport(props) {
           ) => (
             <Grid
               item
-              md={4}
+              md={6}
               container
               key={index}
               spacing={3}
@@ -52,14 +67,14 @@ export default function NewTecnicReport(props) {
                       colors={{ con: "#f44336", pro: "#4caf50" }}
                       data={[
                         {
-                          id: "pro",
-                          label: proName,
-                          value: percentage,
-                        },
-                        {
                           id: "con",
                           label: conName,
                           value: 100 - percentage,
+                        },
+                        {
+                          id: "pro",
+                          label: proName,
+                          value: percentage,
                         },
                       ]}
                       text={`${percentage}%`}
@@ -72,13 +87,9 @@ export default function NewTecnicReport(props) {
           )
         )}
       </Grid>
-      <TecnicChart
-        style={{ marginLeft: 15, marginRight: 25 }}
-        data={lineData}
-      />
-      <Grid item md={12}>
+      <Grid container item md={12} justify="center" style={{ marginTop: 50 }}>
         <Typography variant="h3" align="center" style={numberStyle}>
-          Ranking de Asistencias
+          Ranking de consumo
         </Typography>
       </Grid>
       {assistData.map((item, i) => (
@@ -87,14 +98,8 @@ export default function NewTecnicReport(props) {
             data={item.indexes}
             keys={["value"]}
             color={item.color}
+            title={item.title}
           />
-          <Typography
-            align="center"
-            variant="h3"
-            style={{ ...numberStyle, marginLeft: 30 }}
-          >
-            {item.title}
-          </Typography>
         </Grid>
       ))}
     </Grid>
@@ -147,24 +152,31 @@ const rankings = ["Correctivo", "Preventivo", "Ingeniería"];
 
 const reportData = [
   {
-    proName: "Autorizadas",
-    conName: "Solicitudes",
-    pendingName: "Pediente de Autorizar",
-    pendingValue: 15,
+    proName: "Presupuesto",
+    conName: "Ejecutado",
+    pendingName: "Disponibilidad",
+    pendingValue: formatToUnits(1000, 0),
     percentage: 33,
   },
   {
-    proName: "Ejecutadas",
-    conName: "Autorizadas",
-    pendingName: "Pediente de Ejecutar",
-    pendingValue: 13,
+    proName: "Correctivo",
+    conName: "Ejecutado",
+    pendingName: "Disponibilidad",
+    pendingValue: formatToUnits(1000, 0),
+    percentage: 50,
+  },
+  {
+    proName: "Preventivo",
+    conName: "Ejecutado",
+    pendingName: "Disponibilidad",
+    pendingValue: formatToUnits(1000, 0),
     percentage: 70,
   },
   {
-    proName: "Aprobadas",
-    conName: "Ejecutadas",
-    pendingName: "Pediente de Aprobar",
-    pendingValue: 20,
-    percentage: 50,
+    proName: "Ingeniería",
+    conName: "Ejecutado",
+    pendingName: "Disponibilidad",
+    pendingValue: formatToUnits(1000, 0),
+    percentage: 60,
   },
 ];

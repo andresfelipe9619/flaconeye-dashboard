@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import EconomicReport from "../economic-report/EconomicReport";
 import TecnicReport from "../tecnic-report/TecnicReport";
 import NewTecnicReport from "../tecnic-report/NewTecnicReport";
+import NewEconomicReport from "../economic-report/NewEconomicReport";
 import "react-vis/dist/style.css";
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -12,7 +13,7 @@ const getTecnicReport = async () => {
   return jsonData;
 };
 
-const geteEconomicReport = async () => {
+const getEconomicReport = async () => {
   let response = await fetch(`${API_URL}/reports/economic`);
   let jsonData = await response.json();
   return jsonData;
@@ -25,6 +26,12 @@ export default function Dashboard() {
         path="/economic"
         render={(props) => (
           <EconomicReport getData={getTecnicReport} {...props} />
+        )}
+      />
+      <Route
+        path="/economic_new"
+        render={(props) => (
+          <NewEconomicReport getData={getTecnicReport} {...props} />
         )}
       />
       <Route
