@@ -18,7 +18,8 @@ import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import Dashboard from "./components/dashboard/Dashboard";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
 export default function App() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -32,29 +33,29 @@ export default function App() {
     setOpen(false);
   };
 
-  const handleClick = path => () => history.push(path);
+  const handleClick = (path) => () => history.push(path);
 
   const tabs = [
     {
       icon: <AssessmentIcon />,
       text: "Técnico",
-      path: "/tecnic"
+      path: "/tecnic",
     },
     {
-      icon: <AssessmentIcon />,
+      icon: <AssignmentIcon />,
       text: "Técnico Nuevo",
-      path: "/tecnic_new"
+      path: "/tecnic_new",
     },
     {
       icon: <MonetizationOnIcon />,
       text: "Económico",
-      path: "/economic"
+      path: "/economic",
     },
     {
-      icon: <MonetizationOnIcon />,
-      text: "Económico New",
-      path: "/economic_new"
-    }
+      icon: <BusinessCenterIcon />,
+      text: "Económico Nuevo",
+      path: "/economic_new",
+    },
   ];
   return (
     <div className={classes.root}>
@@ -62,7 +63,7 @@ export default function App() {
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
+          [classes.appBarShift]: open,
         })}
       >
         <Toolbar>
@@ -72,7 +73,7 @@ export default function App() {
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, {
-              [classes.hide]: open
+              [classes.hide]: open,
             })}
           >
             <MenuIcon />
@@ -86,13 +87,13 @@ export default function App() {
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
+          [classes.drawerClose]: !open,
         })}
         classes={{
           paper: clsx({
             [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open
-          })
+            [classes.drawerClose]: !open,
+          }),
         }}
       >
         <div className={classes.toolbar}>
@@ -120,53 +121,53 @@ export default function App() {
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
-    marginRight: 36
+    marginRight: 36,
   },
   hide: {
-    display: "none"
+    display: "none",
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   },
   drawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1
-    }
+      width: theme.spacing(9) + 1,
+    },
   },
   toolbar: {
     display: "flex",
@@ -174,10 +175,10 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
-  }
+    padding: theme.spacing(3),
+  },
 }));

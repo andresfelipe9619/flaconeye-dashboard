@@ -31,7 +31,7 @@ export default function TecnicReport(props) {
         setLoading(false);
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
   const colors = [
     "#009688",

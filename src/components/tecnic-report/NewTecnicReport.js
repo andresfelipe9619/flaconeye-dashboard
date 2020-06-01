@@ -9,7 +9,7 @@ import { Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import AssistsRanking from "./AssistsRanking";
 import assistData from "../economic-report/assistData";
-import lineData from "./data";
+
 export default function NewTecnicReport(props) {
   const { getData } = props;
   const [data, setData] = useState({});
@@ -25,7 +25,7 @@ export default function NewTecnicReport(props) {
         setLoading(false);
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   if (loading) return <LinearProgress />;
@@ -96,20 +96,14 @@ export default function NewTecnicReport(props) {
           Ranking de Asistencias
         </Typography>
       </Grid>
-      {assistData.map((item, i) => (
+      {((data || {}).rankingData || []).map((item, i) => (
         <Grid container item md={4} key={i}>
           <AssistsRanking
+            title={item.title}
             data={item.indexes}
             keys={["value"]}
             color={item.color}
           />
-          <Typography
-            align="center"
-            variant="h3"
-            style={{ ...numberStyle, marginLeft: 30 }}
-          >
-            {item.title}
-          </Typography>
         </Grid>
       ))}
     </Grid>
@@ -157,5 +151,3 @@ const colorGreen = { color: "#4caf50", fontWeight: "bold" };
 const colorRed = { color: "#f44336", fontWeight: "bold" };
 
 const titleStyle = { fontSize: 18, marginTop: 10 };
-
-const rankings = ["Correctivo", "Preventivo", "Ingeniería"];

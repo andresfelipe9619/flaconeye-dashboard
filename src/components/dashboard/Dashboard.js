@@ -43,7 +43,7 @@ export default function Dashboard() {
         strict
         path="/economic_new"
         render={(props) => (
-          <NewEconomicReport getData={getTecnicReport} {...props} />
+          <NewEconomicReport getData={getTechnicalReport} {...props} />
         )}
       />
       <Route
