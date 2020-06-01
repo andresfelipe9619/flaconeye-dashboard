@@ -31,7 +31,7 @@ export default function TecnicChart({ style, data }) {
       <Card raised style={{ width: "100%" }}>
         <div style={{ marginTop: "10px" }}>
           <Typography variant="h5" component="h1" align="center">
-           Cantidad de Asistencias
+            Cantidad de Asistencias
           </Typography>
         </div>
         <CardContent>

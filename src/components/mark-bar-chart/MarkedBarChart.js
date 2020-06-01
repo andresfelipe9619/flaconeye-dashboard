@@ -1,58 +1,56 @@
 import React from "react";
-
-// import Grid from '@material-ui/core/Grid';
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-
+import { Grid, Typography, Card, CardContent } from "@material-ui/core";
 import { ResponsiveBar } from "@nivo/bar";
-import Card from "@material-ui/core/Card";
-// import CardHeader from '@material-ui/core/CardHeader';
-import Typography from "@material-ui/core/Typography";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import { formatToUnits } from "../../utils/index";
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
 
-const borderStyle = (theme) => [[1, "solid", theme.palette.divider]];
 const useStyles = makeStyles((theme) => ({
   container: {
-    height: "450px",
+    height: "250px",
   },
   card: { minWidth: "100%" },
   bold: { fontWeight: "bold" },
-  borderBox: {
-    borderBottom: borderStyle(theme),
-  },
 }));
 
-const HorizontalBarChart = ({ data, keys }) => {
+const MarkedBarChart = ({ data, keys, title, color, media }) => {
   const classes = useStyles();
-
   return (
     <Card raised className={classes.card}>
       <div style={{ marginTop: "10px" }}>
         <Typography variant="h5" component="h1" align="center">
-          Gastos vs Contratado
+          {title}
         </Typography>
       </div>
       <CardContent>
         <Grid container className={classes.container}>
           <ResponsiveBar
-            layout="horizontal"
+            layout="vertical"
             data={data}
             keys={keys}
-            indexBy="assistanceType"
-            margin={{ top: 5, right: 100, bottom: 80, left: 100 }}
-            padding={0.2}
+            indexBy="date"
+            margin={{ top: 10, right: 30, bottom: 80, left: 50 }}
+            padding={0.4}
             innerPadding={3}
-            colors={({ id, data }) => data[`${id}Color`]}
+            colors={color}
             groupMode="grouped"
             enableGridY={false}
             enableGridX={true}
             enableLabel={false}
+            markers={[
+              {
+                axis: "y",
+                value: media,
+                legend: "",
+                legendOrientation: 'vertical',
+                lineStyle: {
+                  stroke: "red",
+                  strokeWidth: 3,
+                },
+                textStyle: {
+                  fill: "red",
+                },
+                anchor: "bottom",
+              },
+            ]}
             defs={[
               {
                 id: "dots",
@@ -77,15 +75,12 @@ const HorizontalBarChart = ({ data, keys }) => {
             axisTop={null}
             axisRight={null}
             axisBottom={{
-              format: (value) => formatToUnits(value, 0),
-              //     {
-              // 	tickSize: 0,
-              // 	tickPadding: 0,
-              // 	tickRotation: 0,
-              // 	legend: '',
-              // 	legendPosition: 'middle',
-              // 	legendOffset: 32,
-              // }
+              tickSize: 0,
+              tickPadding: 12,
+              tickRotation: -55,
+              legend: "",
+              legendPosition: "middle",
+              legendOffset: 32,
             }}
             axisLeft={{
               tickSize: 5,
@@ -105,7 +100,7 @@ const HorizontalBarChart = ({ data, keys }) => {
                 direction: "row",
                 justify: false,
                 translateX: 15,
-                translateY: 60,
+                translateY: 75,
                 itemsSpacing: 2,
                 itemWidth: 100,
                 itemHeight: 20,
@@ -125,18 +120,6 @@ const HorizontalBarChart = ({ data, keys }) => {
             animate={true}
             motionStiffness={90}
             motionDamping={15}
-            tooltip={({ id, value, color }) => (
-              <strong style={{ color }}>
-                {id}: {formatToUnits(value, 0)}
-              </strong>
-            )}
-            theme={{
-              tooltip: {
-                container: {
-                  background: "#333",
-                },
-              },
-            }}
           />
         </Grid>
       </CardContent>
@@ -144,4 +127,4 @@ const HorizontalBarChart = ({ data, keys }) => {
   );
 };
 
-export default HorizontalBarChart;
+export default MarkedBarChart;

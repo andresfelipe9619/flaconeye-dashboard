@@ -8,6 +8,8 @@ import CardContent from "@material-ui/core/CardContent";
 import { Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import AssistsRanking from "./AssistsRanking";
+import assistData from "../economic-report/assistData";
+import lineData from "./data";
 export default function NewTecnicReport(props) {
   const { getData } = props;
   const [data, setData] = useState({});
@@ -89,20 +91,24 @@ export default function NewTecnicReport(props) {
         style={{ marginLeft: 15, marginRight: 25 }}
         data={(data || {}).lineData || []}
       />
-      <Grid item md="12">
+      <Grid item md={12}>
         <Typography variant="h3" align="center" style={numberStyle}>
           Ranking de Asistencias
         </Typography>
       </Grid>
-      {rankings.map((title, i) => (
+      {assistData.map((item, i) => (
         <Grid container item md={4} key={i}>
-          <AssistsRanking />
+          <AssistsRanking
+            data={item.indexes}
+            keys={["value"]}
+            color={item.color}
+          />
           <Typography
             align="center"
             variant="h3"
             style={{ ...numberStyle, marginLeft: 30 }}
           >
-            {title}
+            {item.title}
           </Typography>
         </Grid>
       ))}

@@ -1,30 +1,30 @@
 export default [
   {
     assistanceType: "Correctivo",
-    contratado: 31000,
+    contratado: 150000,
     contratadoColor: "#4caf50",
-    ejecutado: 19000,
+    ejecutado: 54000,
     ejecutadoColor: "#f44336",
   },
   {
     assistanceType: "Preventivo",
-    contratado: 12000,
+    contratado: 269000,
     contratadoColor: "#4caf50",
-    ejecutado: 15000,
+    ejecutado: 134500,
     ejecutadoColor: "#f44336",
   },
   {
     assistanceType: "Ingenieria",
-    contratado: 420000,
+    contratado: 398258,
     contratadoColor: "#4caf50",
-    ejecutado: 49000,
+    ejecutado: 99564,
     ejecutadoColor: "#f44336",
   },
   {
     assistanceType: "Centro de control",
-    contratado: 55000,
+    contratado: 45000,
     contratadoColor: "#4caf50",
-    ejecutado: 20000,
+    ejecutado: 6750,
     ejecutadoColor: "#f44336",
   },
 ];

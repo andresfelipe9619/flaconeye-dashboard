@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 
-const margin = { top: 0, right: 50, bottom: 0, left: 50 };
+const margin = { top: 0, right: 80, bottom: 0, left: 20 };
 
 const styles = {
   root: {
