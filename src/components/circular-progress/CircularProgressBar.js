@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 
-const margin = { top: 0, right: 80, bottom: 0, left: 20 };
+const margin = { top: 0, right: 0, bottom: 0, left: "5%" };
 
 const styles = {
   root: {
@@ -9,6 +9,7 @@ const styles = {
     position: "relative",
     width: 300,
     height: 250,
+    margin: "0px auto",
   },
   overlay: {
     position: "absolute",
@@ -21,7 +22,8 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     fontSize: 24,
-    color: "#555",
+    fontWeight: "bold",
+    color: "#4caf50",
     textAlign: "center",
     // This is important to preserve the chart interactivity
     pointerEvents: "none",
@@ -60,7 +62,6 @@ const CircularProgressBar = ({ data, colors, text }) => {
   return (
     <div style={styles.root}>
       <ResponsivePie
-        margin={margin}
         data={data}
         colors={getColor}
         innerRadius={0.8}

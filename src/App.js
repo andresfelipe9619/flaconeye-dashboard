@@ -66,7 +66,7 @@ export default function App() {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.title}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -79,7 +79,7 @@ export default function App() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Falconeye Dashboard
+            FALCONEYE
           </Typography>
         </Toolbar>
       </AppBar>
@@ -114,8 +114,19 @@ export default function App() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Dashboard />
+        <div className={classes.footer}>
+          <Copyright classes={classes} />
+        </div>
       </main>
     </div>
+  );
+}
+function Copyright({ classes }) {
+  return (
+    <Typography variant="h6" color="textSecondary" align="center">
+      {`© ${new Date().getFullYear()} Copyright:`}{" "}
+      <span className={classes.company}>FALCONEYE</span>
+    </Typography>
   );
 }
 
@@ -145,6 +156,19 @@ const useStyles = makeStyles((theme) => ({
   },
   hide: {
     display: "none",
+  },
+  title: {
+    color: "white",
+  },
+  company: {
+    color: theme.palette.primary.main,
+  },
+  footer: {
+    flexGrow: 1,
+    marginTop: 30,
+    paddingTop: 20,
+    justifyContent: "center",
+    borderTop: [[1, "solid", theme.palette.divider]],
   },
   drawer: {
     width: drawerWidth,

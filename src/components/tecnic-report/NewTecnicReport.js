@@ -8,7 +8,6 @@ import CardContent from "@material-ui/core/CardContent";
 import { Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import AssistsRanking from "./AssistsRanking";
-import assistData from "../economic-report/assistData";
 
 export default function NewTecnicReport(props) {
   const { getData } = props;
@@ -29,18 +28,19 @@ export default function NewTecnicReport(props) {
   }, []);
 
   if (loading) return <LinearProgress />;
+  const colors = { con: "#f44336", pro: "#4caf50" };
   return (
     <Grid container spacing={4} justify="center">
-      <Grid container spacing={6} item md={12} justify="center">
+      <Grid container spacing={0} item md={12} justify="space-around">
         {((data || {}).pieData || []).map(
           (
             {
               proName,
               conName,
-              pendingName,
               pendingValue,
-              proPercentage,
-              conPercentage,
+              proPercentage = 0,
+              proCount = 0,
+              conCount = 0,
             },
             index
           ) => {
@@ -56,20 +56,20 @@ export default function NewTecnicReport(props) {
               >
                 <DividedCard above={conName} below={proName} hasColors />
                 <Grid item md={12}>
-                  <Card raised>
+                  <Card style={{ overflow: "visible" }} raised>
                     <CardContent>
                       <CircularProgressBar
-                        colors={{ con: "#f44336", pro: "#4caf50" }}
+                        colors={colors}
                         data={[
                           {
                             id: "pro",
                             label: proName,
-                            value: proPercentage,
+                            value: proCount,
                           },
                           {
                             id: "con",
                             label: conName,
-                            value: conPercentage,
+                            value: conCount,
                           },
                         ]}
                         text={`${proPercentage}%`}
@@ -78,7 +78,7 @@ export default function NewTecnicReport(props) {
                   </Card>
                 </Grid>
                 <DividedCard
-                  above={pendingName}
+                  above={"Pendiente"}
                   below={pendingValue}
                   hasNumber
                 />

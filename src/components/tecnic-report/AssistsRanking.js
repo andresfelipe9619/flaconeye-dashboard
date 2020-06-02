@@ -80,6 +80,13 @@ export default function AssistsRanking({ data, color, keys, title }) {
             labelSkipHeight={12}
             labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
             legends={[]}
+            tooltip={({ indexValue, value }) => {
+              return (
+                <strong>
+                  Ubicación {indexValue}: {value} Asistencias
+                </strong>
+              );
+            }}
             animate={true}
             motionStiffness={90}
             motionDamping={15}
