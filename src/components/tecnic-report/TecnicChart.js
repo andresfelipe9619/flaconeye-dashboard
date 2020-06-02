@@ -25,6 +25,7 @@ export default function TecnicChart({ style, data }) {
       style={{
         background: "white",
         marginTop: 25,
+        marginRight: 20,
         ...style,
       }}
     >

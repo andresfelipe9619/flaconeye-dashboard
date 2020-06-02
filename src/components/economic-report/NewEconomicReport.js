@@ -45,7 +45,7 @@ export default function NewEconomicReport(props) {
           </Grid>
         ))}
       </Grid>
-      <Grid container item md={7} spacing={5}>
+      <Grid container item md={7} justify="space-around">
         {reportData.map(
           (
             { percentage, pendingValue, pendingName, proName, conName },
@@ -107,7 +107,7 @@ export default function NewEconomicReport(props) {
 }
 
 const DividedCard = ({ above, below, hasNumber, hasColors }) => (
-  <Grid item md={12}>
+  <Grid item md={12} style={{ margin: "10px 0px" }}>
     <Card raised>
       <CardContent>
         <Typography
@@ -147,8 +147,6 @@ const colorGreen = { color: "#4caf50", fontWeight: "bold" };
 const colorRed = { color: "#f44336", fontWeight: "bold" };
 
 const titleStyle = { fontSize: 18, marginTop: 10 };
-
-const rankings = ["Correctivo", "Preventivo", "Ingeniería"];
 
 const reportData = [
   {

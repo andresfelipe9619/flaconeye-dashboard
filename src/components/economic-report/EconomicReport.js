@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import TecnicChart from "../tecnic-report/TecnicChart";
 import HorizontalBarChart from "../horizontal-bar/HorizontalBarChart";
 import barData from "../horizontal-bar/data";
-import lineData from "../tecnic-report/data";
 import { formatToUnits } from "../../utils";
 
 export default function TecnicReport(props) {
@@ -47,7 +46,7 @@ export default function TecnicReport(props) {
   return (
     <Grid container spacing={3}>
       <Grid container spacing={6} item md={12}>
-        {(tempData || []).map(
+        {((data || {}).kpi || []).map(
           (
             { title, percentage, accumulated, currentValue, currentDate },
             index
@@ -67,7 +66,7 @@ export default function TecnicReport(props) {
           )
         )}
       </Grid>
-      <TecnicChart data={lineData} />
+      <TecnicChart data={(data || {}).lineData || []} />
       <Grid container item md={12} alignItems="center" justify="center">
         <Grid item md={7}>
           <HorizontalBarChart data={barData} keys={barKeys} />
@@ -143,36 +142,5 @@ const tableData = [
     title: "Ingeniería",
     location: "705 - Av. Mexico / Abreu",
     value: 7853,
-  },
-];
-
-const tempData = [
-  {
-    title: "Centro de control",
-    percentage: 10.0,
-    accumulated: 387629,
-    currentValue: 33398,
-    currentDate: "Abril 2020",
-  },
-  {
-    title: "Correctivo",
-    percentage: 30.0,
-    accumulated: 1273076,
-    currentValue: 167510,
-    currentDate: "Abril 2020",
-  },
-  {
-    title: "Ingeniería",
-    percentage: 60.0,
-    accumulated: 4898004,
-    currentValue: 2116597,
-    currentDate: "Abril 2020",
-  },
-  {
-    title: "Preventivo",
-    percentage: 0,
-    accumulated: 368647,
-    currentValue: 0,
-    currentDate: "Abril 2020",
   },
 ];
