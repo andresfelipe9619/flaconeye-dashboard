@@ -87,22 +87,30 @@ export default function NewEconomicReport(props) {
           )
         )}
       </Grid>
-      <Grid container item md={12} justify="center" style={{ marginTop: 50 }}>
-        <Typography variant="h3" align="center" style={numberStyle}>
-          Ranking de consumo
-        </Typography>
+      <Grid container item md={12}>
+        <Card raised>
+          <CardContent>
+            <Grid container spacing={2}>
+              <Grid item md={12}>
+                <Typography variant="h3" align="center" style={numberStyle}>
+                  Ranking de Consumo
+                </Typography>
+              </Grid>
+              {((data || {}).rankingData || []).map((item, i) => (
+                <Grid container item md={4} key={i}>
+                  <AssistsRanking
+                    economic
+                    title={item.title}
+                    data={item.indexes}
+                    keys={["value"]}
+                    color={item.color}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </CardContent>
+        </Card>
       </Grid>
-      {((data || {}).rankingData || []).map((item, i) => (
-        <Grid container item md={4} key={i}>
-          <AssistsRanking
-            economic
-            data={item.indexes}
-            keys={["value"]}
-            color={item.color}
-            title={item.title}
-          />
-        </Grid>
-      ))}
     </Grid>
   );
 }

@@ -63,7 +63,7 @@ export default function AssistsRanking({ data, color, keys, title, economic }) {
           axisBottom={{
             tickSize: 0,
             tickPadding: 0,
-            tickRotation: 70,
+            tickRotation: economic ? 90 : 0,
             legend: "",
             legendPosition: "middle",
             legendOffset: 32,
