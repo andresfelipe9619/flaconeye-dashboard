@@ -51,7 +51,7 @@ export default function NewTecnicReport(props) {
                 md={4}
                 container
                 key={index}
-                spacing={3}
+                spacing={1}
                 diirection="column"
               >
                 <DividedCard above={conName} below={proName} hasColors />
@@ -91,21 +91,29 @@ export default function NewTecnicReport(props) {
         style={{ marginLeft: 15, marginRight: 25 }}
         data={(data || {}).lineData || []}
       />
-      <Grid item md={12}>
-        <Typography variant="h3" align="center" style={numberStyle}>
-          Ranking de Asistencias
-        </Typography>
+      <Grid container item md={12}>
+        <Card raised>
+          <CardContent>
+            <Grid container spacing={2}>
+              <Grid item md={12}>
+                <Typography variant="h3" align="center" style={numberStyle}>
+                  Ranking de Asistencias
+                </Typography>
+              </Grid>
+              {((data || {}).rankingData || []).map((item, i) => (
+                <Grid container item md={4} key={i}>
+                  <AssistsRanking
+                    title={item.title}
+                    data={item.indexes}
+                    keys={["value"]}
+                    color={item.color}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </CardContent>
+        </Card>
       </Grid>
-      {((data || {}).rankingData || []).map((item, i) => (
-        <Grid container item md={4} key={i}>
-          <AssistsRanking
-            title={item.title}
-            data={item.indexes}
-            keys={["value"]}
-            color={item.color}
-          />
-        </Grid>
-      ))}
     </Grid>
   );
 }

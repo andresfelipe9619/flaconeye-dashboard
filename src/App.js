@@ -20,6 +20,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
+import FalconLogo from "./falconeye.ico";
 export default function App() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -37,24 +38,24 @@ export default function App() {
 
   const tabs = [
     {
-      icon: <AssessmentIcon />,
-      text: "Técnico",
-      path: "/tecnic",
-    },
-    {
       icon: <AssignmentIcon />,
-      text: "Técnico Nuevo",
-      path: "/tecnic_new",
+      text: "Técnico",
+      path: "/technical",
     },
     {
-      icon: <MonetizationOnIcon />,
+      icon: <BusinessCenterIcon />,
       text: "Económico",
       path: "/economic",
     },
     {
-      icon: <BusinessCenterIcon />,
-      text: "Económico Nuevo",
-      path: "/economic_new",
+      icon: <AssessmentIcon />,
+      text: "Anterior Técnico",
+      path: "/prev-technical",
+    },
+    {
+      icon: <MonetizationOnIcon />,
+      text: "Anterior Económico",
+      path: "/prev-economic",
     },
   ];
   return (
@@ -78,6 +79,7 @@ export default function App() {
           >
             <MenuIcon />
           </IconButton>
+          <img src={FalconLogo} alt="Falconeye logo" className={classes.logo} />
           <Typography variant="h6" noWrap>
             FALCONEYE
           </Typography>
@@ -162,6 +164,11 @@ const useStyles = makeStyles((theme) => ({
   },
   company: {
     color: theme.palette.primary.main,
+  },
+  logo: {
+    width: 40,
+    height: "auto",
+    margin: 10,
   },
   footer: {
     flexGrow: 1,

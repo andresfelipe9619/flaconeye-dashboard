@@ -33,7 +33,7 @@ export default function Dashboard() {
       <Route
         exact
         strict
-        path="/tecnic"
+        path="/prev-technical"
         render={(props) => (
           <TecnicReport getData={getTechnicalReport} {...props} />
         )}
@@ -41,7 +41,7 @@ export default function Dashboard() {
       <Route
         exact
         strict
-        path="/economic_new"
+        path="/economic"
         render={(props) => (
           <NewEconomicReport getData={getTechnicalReport} {...props} />
         )}
@@ -49,7 +49,7 @@ export default function Dashboard() {
       <Route
         exact
         strict
-        path="/economic"
+        path="/prev-economic"
         render={(props) => (
           <EconomicReport getData={geteEconomicReport} {...props} />
         )}
@@ -57,12 +57,12 @@ export default function Dashboard() {
       <Route
         exact
         strict
-        path="/tecnic_new"
+        path="/technical"
         render={(props) => (
           <NewTecnicReport getData={getTechnicalDeatilReport} {...props} />
         )}
       />
-      <Redirect to="/tecnic" />
+      <Redirect to="/technical" />
     </Switch>
   );
 }
