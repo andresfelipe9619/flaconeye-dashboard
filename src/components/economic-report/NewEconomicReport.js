@@ -9,7 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import AssistsRanking from "../tecnic-report/AssistsRanking";
 import MarkedBarChart from "../mark-bar-chart/MarkedBarChart";
 import markBarData from "../mark-bar-chart/data";
-import assistData from "../economic-report/assistData";
 import { formatToUnits } from "../../utils";
 
 export default function NewEconomicReport(props) {
@@ -30,9 +29,10 @@ export default function NewEconomicReport(props) {
   }, []);
 
   if (loading) return <LinearProgress />;
+  console.log("data", data);
   return (
-    <Grid container item md={12} spacing={3}>
-      <Grid container item md={5}>
+    <Grid container item md={12} spacing={2}>
+      <Grid container item md={5} spacing={1}>
         {markBarData.map((item, i) => (
           <Grid item md={12} key={i}>
             <MarkedBarChart
@@ -56,7 +56,7 @@ export default function NewEconomicReport(props) {
               md={6}
               container
               key={index}
-              spacing={3}
+              spacing={1}
               diirection="column"
             >
               <DividedCard above={conName} below={proName} hasColors />
@@ -92,9 +92,10 @@ export default function NewEconomicReport(props) {
           Ranking de consumo
         </Typography>
       </Grid>
-      {assistData.map((item, i) => (
+      {((data || {}).rankingData || []).map((item, i) => (
         <Grid container item md={4} key={i}>
           <AssistsRanking
+            economic
             data={item.indexes}
             keys={["value"]}
             color={item.color}

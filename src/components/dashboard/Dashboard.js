@@ -27,6 +27,11 @@ const geteEconomicReport = async () => {
   return response;
 };
 
+const getEconomicDeatilReport = async () => {
+  let response = await fetchAPI(`reports/economic-detail`);
+  return response;
+};
+
 export default function Dashboard() {
   return (
     <Switch>
@@ -43,7 +48,7 @@ export default function Dashboard() {
         strict
         path="/economic"
         render={(props) => (
-          <NewEconomicReport getData={getTechnicalReport} {...props} />
+          <NewEconomicReport getData={getEconomicDeatilReport} {...props} />
         )}
       />
       <Route

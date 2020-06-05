@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Typography, Card, CardContent } from "@material-ui/core";
 import { ResponsiveBar } from "@nivo/bar";
 import { makeStyles } from "@material-ui/core/styles";
+import { formatToUnits } from "../../utils";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles(() => ({
   bold: { fontWeight: "bold" },
 }));
 
-export default function AssistsRanking({ data, color, keys, title }) {
+export default function AssistsRanking({ data, color, keys, title, economic }) {
   const classes = useStyles();
   return (
     <div className={classes.card}>
@@ -62,7 +63,7 @@ export default function AssistsRanking({ data, color, keys, title }) {
           axisBottom={{
             tickSize: 0,
             tickPadding: 0,
-            tickRotation: 0,
+            tickRotation: 70,
             legend: "",
             legendPosition: "middle",
             legendOffset: 32,
@@ -80,9 +81,12 @@ export default function AssistsRanking({ data, color, keys, title }) {
           labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
           legends={[]}
           tooltip={({ indexValue, value }) => {
+            let economicText = formatToUnits(value, 0);
+            let technicalText = `${value} Asistencias`;
             return (
               <strong>
-                Ubicación {indexValue}: {value} Asistencias
+                Ubicación {indexValue}:{" "}
+                {economic ? economicText : technicalText}
               </strong>
             );
           }}
