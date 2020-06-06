@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Typography, Card, CardContent } from "@material-ui/core";
 import { ResponsiveBar } from "@nivo/bar";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { formatToAbbreviation } from "../../utils";
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "250px",
@@ -21,7 +21,7 @@ const MarkedBarChart = ({ data, keys, title, color, media }) => {
         </Typography>
       </div>
       <CardContent>
-        <Grid container className={classes.container}>
+        <div className={classes.container}>
           <ResponsiveBar
             layout="vertical"
             data={data}
@@ -39,14 +39,18 @@ const MarkedBarChart = ({ data, keys, title, color, media }) => {
               {
                 axis: "y",
                 value: media,
-                legend: "",
-                legendOrientation: 'vertical',
+                legend: "media",
+                legendOrientation: "vertical",
+                legendStyle: {
+                  stroke: "#42a5f5",
+                  strokeWidth: 2,
+                },
                 lineStyle: {
-                  stroke: "red",
+                  stroke: "#42a5f5",
                   strokeWidth: 3,
                 },
                 textStyle: {
-                  fill: "red",
+                  fill: "#42a5f5",
                 },
                 anchor: "bottom",
               },
@@ -86,6 +90,7 @@ const MarkedBarChart = ({ data, keys, title, color, media }) => {
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
+              format: formatToAbbreviation,
               legend: "",
               legendPosition: "middle",
               legendOffset: -40,
@@ -105,23 +110,23 @@ const MarkedBarChart = ({ data, keys, title, color, media }) => {
                 itemWidth: 100,
                 itemHeight: 20,
                 itemDirection: "left-to-right",
-                itemOpacity: 0.85,
+                itemOpacity: 1,
                 symbolSize: 20,
-                effects: [
-                  {
-                    on: "hover",
-                    style: {
-                      itemOpacity: 1,
-                    },
-                  },
-                ],
+                // effects: [
+                //   {
+                //     on: "hover",
+                //     style: {
+                //       itemOpacity: 1,
+                //     },
+                //   },
+                // ],
               },
             ]}
-            animate={true}
+            animate={false}
             motionStiffness={90}
             motionDamping={15}
           />
-        </Grid>
+        </div>
       </CardContent>
     </Card>
   );

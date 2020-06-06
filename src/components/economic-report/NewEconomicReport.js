@@ -31,24 +31,32 @@ export default function NewEconomicReport(props) {
   if (loading) return <LinearProgress />;
   console.log("data", data);
   return (
-    <Grid container item md={12} spacing={2}>
-      <Grid container item md={5} spacing={1}>
-        {markBarData.map((item, i) => (
-          <Grid item md={12} key={i}>
+    <Grid container spacing={2}>
+      <Grid container item md={5} direction="column" justify="space-between">
+        {((data || {}).barData || []).map((item, i) => (
+          <Grid container key={i}>
             <MarkedBarChart
-              data={item.indexes}
+              data={item.data}
               title={item.title}
               color={item.color}
               media={item.media}
-              keys={["value"]}
+              keys={["value", "media"]}
             />
           </Grid>
         ))}
       </Grid>
-      <Grid container item md={7} justify="space-around">
-        {reportData.map(
+
+      <Grid container item md={7} spacing={1} justify="space-between">
+        {((data || {}).pieData || []).map(
           (
-            { percentage, pendingValue, pendingName, proName, conName },
+            {
+              proName,
+              conName,
+              pendingValue,
+              proPercentage = 0,
+              proCount = 0,
+              conCount = 0,
+            },
             index
           ) => (
             <Grid
@@ -61,7 +69,7 @@ export default function NewEconomicReport(props) {
             >
               <DividedCard above={conName} below={proName} hasColors />
               <Grid item md={12}>
-                <Card raised>
+                <Card style={{ overflow: "visible" }} raised>
                   <CardContent>
                     <CircularProgressBar
                       colors={{ con: "#f44336", pro: "#4caf50" }}
@@ -69,20 +77,24 @@ export default function NewEconomicReport(props) {
                         {
                           id: "con",
                           label: conName,
-                          value: 100 - percentage,
+                          value: conCount,
                         },
                         {
                           id: "pro",
                           label: proName,
-                          value: percentage,
+                          value: proCount,
                         },
                       ]}
-                      text={`${percentage}%`}
+                      text={`${proPercentage}%`}
                     />
                   </CardContent>
                 </Card>
               </Grid>
-              <DividedCard above={pendingName} below={pendingValue} hasNumber />
+              <DividedCard
+                above={"Disponibilidad"}
+                below={formatToUnits(pendingValue)}
+                hasNumber
+              />
             </Grid>
           )
         )}
@@ -92,7 +104,12 @@ export default function NewEconomicReport(props) {
           <CardContent>
             <Grid container spacing={2}>
               <Grid item md={12}>
-                <Typography variant="h3" align="center" style={numberStyle}>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  align="center"
+                  style={numberStyle}
+                >
                   Ranking de Consumo
                 </Typography>
               </Grid>
@@ -116,7 +133,7 @@ export default function NewEconomicReport(props) {
 }
 
 const DividedCard = ({ above, below, hasNumber, hasColors }) => (
-  <Grid item md={12} style={{ margin: "10px 0px" }}>
+  <Grid item md={12} style={{ margin: "0px" }}>
     <Card raised>
       <CardContent>
         <Typography
@@ -156,34 +173,3 @@ const colorGreen = { color: "#4caf50", fontWeight: "bold" };
 const colorRed = { color: "#f44336", fontWeight: "bold" };
 
 const titleStyle = { fontSize: 18, marginTop: 10 };
-
-const reportData = [
-  {
-    proName: "Presupuesto",
-    conName: "Ejecutado",
-    pendingName: "Disponibilidad",
-    pendingValue: formatToUnits(1000, 0),
-    percentage: 33,
-  },
-  {
-    proName: "Correctivo",
-    conName: "Ejecutado",
-    pendingName: "Disponibilidad",
-    pendingValue: formatToUnits(1000, 0),
-    percentage: 50,
-  },
-  {
-    proName: "Preventivo",
-    conName: "Ejecutado",
-    pendingName: "Disponibilidad",
-    pendingValue: formatToUnits(1000, 0),
-    percentage: 70,
-  },
-  {
-    proName: "Ingeniería",
-    conName: "Ejecutado",
-    pendingName: "Disponibilidad",
-    pendingValue: formatToUnits(1000, 0),
-    percentage: 60,
-  },
-];

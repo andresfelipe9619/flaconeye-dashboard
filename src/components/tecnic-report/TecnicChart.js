@@ -31,7 +31,12 @@ export default function TecnicChart({ style, data }) {
     >
       <Card raised style={{ width: "100%" }}>
         <div style={{ marginTop: "10px" }}>
-          <Typography variant="h5" component="h1" align="center">
+          <Typography
+            style={{ fontWeight: "bold" }}
+            variant="h5"
+            component="h2"
+            align="center"
+          >
             Cantidad de Asistencias
           </Typography>
         </div>

@@ -22,7 +22,7 @@ const getTechnicalDeatilReport = async () => {
   return response;
 };
 
-const geteEconomicReport = async () => {
+const getEconomicReport = async () => {
   let response = await fetchAPI(`reports/economic`);
   return response;
 };
@@ -56,7 +56,7 @@ export default function Dashboard() {
         strict
         path="/prev-economic"
         render={(props) => (
-          <EconomicReport getData={geteEconomicReport} {...props} />
+          <EconomicReport getData={getEconomicReport} {...props} />
         )}
       />
       <Route

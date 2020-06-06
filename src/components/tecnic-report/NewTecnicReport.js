@@ -96,7 +96,12 @@ export default function NewTecnicReport(props) {
           <CardContent>
             <Grid container spacing={2}>
               <Grid item md={12}>
-                <Typography variant="h3" align="center" style={numberStyle}>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  align="center"
+                  style={numberStyle}
+                >
                   Ranking de Asistencias
                 </Typography>
               </Grid>

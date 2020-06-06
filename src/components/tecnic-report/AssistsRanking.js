@@ -1,8 +1,8 @@
 import React from "react";
-import { Grid, Typography, Card, CardContent } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { ResponsiveBar } from "@nivo/bar";
 import { makeStyles } from "@material-ui/core/styles";
-import { formatToUnits } from "../../utils";
+import { formatToUnits, formatToAbbreviation } from "../../utils";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -16,13 +16,6 @@ export default function AssistsRanking({ data, color, keys, title, economic }) {
   const classes = useStyles();
   return (
     <div className={classes.card}>
-      {title ? (
-        <div style={{ marginTop: "10px" }}>
-          <Typography variant="h5" component="h1" align="center">
-            {title}
-          </Typography>
-        </div>
-      ) : null}
       <Grid container className={classes.container}>
         <ResponsiveBar
           layout="horizontal"
@@ -63,8 +56,9 @@ export default function AssistsRanking({ data, color, keys, title, economic }) {
           axisBottom={{
             tickSize: 0,
             tickPadding: 0,
-            tickRotation: economic ? 90 : 0,
+            tickRotation: economic ? -45 : 0,
             legend: "",
+            format: formatToAbbreviation,
             legendPosition: "middle",
             legendOffset: 32,
           }}
@@ -90,11 +84,18 @@ export default function AssistsRanking({ data, color, keys, title, economic }) {
               </strong>
             );
           }}
-          animate={true}
+          animate={false}
           motionStiffness={90}
           motionDamping={15}
         />
       </Grid>
+      {title ? (
+        <div>
+          <Typography variant="h5" component="h1" align="center">
+            {title}
+          </Typography>
+        </div>
+      ) : null}
     </div>
   );
 }
