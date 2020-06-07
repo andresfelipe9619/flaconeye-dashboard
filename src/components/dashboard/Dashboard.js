@@ -25,7 +25,7 @@ export default function Dashboard() {
     })();
   }, []);
 
-  if (!dsLayers) return null;
+  if (!dsLayers.length) return null;
   return (
     <Switch>
       {dsLayers.map((layer, i) => {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import ReportCard from "../report-card/ReportCard";
 import EconomicCard from "./EconomicCard";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -17,7 +16,6 @@ export default function TecnicReport(props) {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const barKeys = ["contratado", "ejecutado"];
-  const mockedValue = 113772;
 
   useEffect(() => {
     (async () => {
@@ -43,6 +41,10 @@ export default function TecnicReport(props) {
     "#ff9800",
   ];
   if (loading) return <LinearProgress />;
+  const totalExecuted = ((data || {}).mostExpensive || []).reduce(
+    (acc, item) => acc + item.value,
+    0
+  );
   return (
     <Grid container spacing={3}>
       <Grid container spacing={6} item md={12}>
@@ -73,10 +75,10 @@ export default function TecnicReport(props) {
         </Grid>
         <Grid item md={5} style={{ padding: "15px" }}>
           <Grid item md={12} style={{ padding: "10px" }}>
-            <TableCard data={tableData} />
+            <TableCard data={(data || {}).mostExpensive} />
           </Grid>
           <Grid item md={12}>
-            <DividedCard below={mockedValue} />
+            <DividedCard below={totalExecuted} />
           </Grid>
         </Grid>
       </Grid>
@@ -126,21 +128,3 @@ const TableCard = ({ data }) => (
     </CardContent>
   </Card>
 );
-
-const tableData = [
-  {
-    title: "Correctivo",
-    location: "108 - Nuñez / Thomen",
-    value: 3698,
-  },
-  {
-    title: "Preventivo",
-    location: "103 - Nuñez / 27 Febrero",
-    value: 4986,
-  },
-  {
-    title: "Ingeniería",
-    location: "705 - Av. Mexico / Abreu",
-    value: 7853,
-  },
-];
