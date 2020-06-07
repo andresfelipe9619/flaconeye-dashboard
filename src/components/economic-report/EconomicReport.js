@@ -8,7 +8,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import TecnicChart from "../tecnic-report/TecnicChart";
 import HorizontalBarChart from "../horizontal-bar/HorizontalBarChart";
-import barData from "../horizontal-bar/data";
 import { formatToUnits } from "../../utils";
 
 export default function TecnicReport(props) {
@@ -71,7 +70,7 @@ export default function TecnicReport(props) {
       <TecnicChart data={(data || {}).lineData || []} />
       <Grid container item md={12} alignItems="center" justify="center">
         <Grid item md={7}>
-          <HorizontalBarChart data={barData} keys={barKeys} />
+          <HorizontalBarChart data={(data || {}).barData} keys={barKeys} />
         </Grid>
         <Grid item md={5} style={{ padding: "15px" }}>
           <Grid item md={12} style={{ padding: "10px" }}>

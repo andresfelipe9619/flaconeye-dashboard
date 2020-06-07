@@ -1,17 +1,11 @@
 import React from "react";
-
-// import Grid from '@material-ui/core/Grid';
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-
 import { ResponsiveBar } from "@nivo/bar";
 import Card from "@material-ui/core/Card";
-// import CardHeader from '@material-ui/core/CardHeader';
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import { formatToUnits } from "../../utils/index";
+import { formatToUnits, formatToAbbreviation } from "../../utils/index";
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -77,7 +71,7 @@ const HorizontalBarChart = ({ data, keys }) => {
             axisTop={null}
             axisRight={null}
             axisBottom={{
-              format: (value) => formatToUnits(value, 0),
+              format: formatToAbbreviation,
               //     {
               // 	tickSize: 0,
               // 	tickPadding: 0,
