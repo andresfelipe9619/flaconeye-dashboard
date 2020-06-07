@@ -1,73 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import EconomicReport from "../economic-report/EconomicReport";
 import TecnicReport from "../tecnic-report/TecnicReport";
 import NewTecnicReport from "../tecnic-report/NewTecnicReport";
 import NewEconomicReport from "../economic-report/NewEconomicReport";
-import "react-vis/dist/style.css";
-const API_URL = process.env.REACT_APP_API_URL;
-
-const fetchAPI = async (endpoint) => {
-  let response = await fetch(`${API_URL}/${endpoint}`);
-  let jsonData = await response.json();
-  return jsonData;
-};
-
-const getTechnicalReport = async () => {
-  let response = await fetchAPI(`reports/technical`);
-  return response;
-};
-const getTechnicalDeatilReport = async () => {
-  let response = await fetchAPI(`reports/technical-detail`);
-  return response;
-};
-
-const getEconomicReport = async () => {
-  let response = await fetchAPI(`reports/economic`);
-  return response;
-};
-
-const getEconomicDeatilReport = async () => {
-  let response = await fetchAPI(`reports/economic-detail`);
-  return response;
-};
+import {
+  getDsLayers,
+  getEconomicReport,
+  getTechnicalReport,
+  getEconomicDeatilReport,
+  getTechnicalDeatilReport,
+} from "../../api";
 
 export default function Dashboard() {
+  const [dsLayers, setDsLayers] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const layers = await getDsLayers();
+        setDsLayers(layers);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  if (!dsLayers) return null;
   return (
     <Switch>
-      <Route
-        exact
-        strict
-        path="/prev-technical"
-        render={(props) => (
-          <TecnicReport getData={getTechnicalReport} {...props} />
-        )}
-      />
-      <Route
-        exact
-        strict
-        path="/economic"
-        render={(props) => (
-          <NewEconomicReport getData={getEconomicDeatilReport} {...props} />
-        )}
-      />
-      <Route
-        exact
-        strict
-        path="/prev-economic"
-        render={(props) => (
-          <EconomicReport getData={getEconomicReport} {...props} />
-        )}
-      />
-      <Route
-        exact
-        strict
-        path="/technical"
-        render={(props) => (
-          <NewTecnicReport getData={getTechnicalDeatilReport} {...props} />
-        )}
-      />
-      <Redirect to="/technical" />
+      {dsLayers.map((layer, i) => {
+        if (!layer.state) return null;
+        return (
+          <Route
+            exact
+            strict
+            key={i}
+            path={`/${layer.property.toLowerCase()}`}
+            render={mapper[layer.property]}
+          />
+        );
+      })}
+      <Redirect to={`/${(dsLayers[0] || {}).property || ""}`} />
     </Switch>
   );
 }
+
+const mapper = {
+  Technical: (props) => (
+    <NewTecnicReport getData={getTechnicalDeatilReport} {...props} />
+  ),
+  Economic: (props) => (
+    <NewEconomicReport getData={getEconomicDeatilReport} {...props} />
+  ),
+  Technical_v0: (props) => (
+    <TecnicReport getData={getTechnicalReport} {...props} />
+  ),
+  Economic_v0: (props) => (
+    <EconomicReport getData={getEconomicReport} {...props} />
+  ),
+};

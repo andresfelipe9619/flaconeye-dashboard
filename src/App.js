@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,9 +21,13 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
 import FalconLogo from "./falconeye.ico";
+import { getDsLayers } from "./api";
+
 export default function App() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [tabs, setTabs] = useState([]);
+  const [error, setError] = useState(null);
   let history = useHistory();
 
   const handleDrawerOpen = () => {
@@ -36,28 +40,23 @@ export default function App() {
 
   const handleClick = (path) => () => history.push(path);
 
-  const tabs = [
-    {
-      icon: <AssignmentIcon />,
-      text: "Técnico",
-      path: "/technical",
-    },
-    {
-      icon: <BusinessCenterIcon />,
-      text: "Económico",
-      path: "/economic",
-    },
-    {
-      icon: <AssessmentIcon />,
-      text: "Anterior Técnico",
-      path: "/prev-technical",
-    },
-    {
-      icon: <MonetizationOnIcon />,
-      text: "Anterior Económico",
-      path: "/prev-economic",
-    },
-  ];
+  useEffect(() => {
+    (async () => {
+      try {
+        const layers = await getDsLayers();
+        const layersTabs = layers.map((l) => ({
+          icon: mapper[l.property],
+          text: l.name,
+          path: `/${l.property}`,
+        }));
+        setTabs(layersTabs);
+      } catch (error) {
+        console.log(error);
+        setError(error);
+      }
+    })();
+  }, []);
+  if (error) return <strong>{(error || {}).message}</strong>;
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -131,6 +130,13 @@ function Copyright({ classes }) {
     </Typography>
   );
 }
+
+const mapper = {
+  Technical: <AssignmentIcon />,
+  Economic: <BusinessCenterIcon />,
+  Technical_v0: <AssessmentIcon />,
+  Economic_v0: <MonetizationOnIcon />,
+};
 
 const drawerWidth = 240;
 

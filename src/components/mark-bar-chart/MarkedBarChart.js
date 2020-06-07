@@ -1,9 +1,9 @@
 import React from "react";
-import { Grid, Typography, Card, CardContent } from "@material-ui/core";
+import { Typography, Card, CardContent } from "@material-ui/core";
 import { ResponsiveBar } from "@nivo/bar";
 import { makeStyles } from "@material-ui/core/styles";
 import { formatToAbbreviation } from "../../utils";
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   container: {
     height: "250px",
   },

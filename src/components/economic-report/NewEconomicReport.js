@@ -8,7 +8,6 @@ import { Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import AssistsRanking from "../tecnic-report/AssistsRanking";
 import MarkedBarChart from "../mark-bar-chart/MarkedBarChart";
-import markBarData from "../mark-bar-chart/data";
 import { formatToUnits } from "../../utils";
 
 export default function NewEconomicReport(props) {
@@ -26,6 +25,7 @@ export default function NewEconomicReport(props) {
         setLoading(false);
       }
     })();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) return <LinearProgress />;
@@ -37,7 +37,7 @@ export default function NewEconomicReport(props) {
           <Grid container key={i}>
             <MarkedBarChart
               data={item.data}
-              title={item.title}
+              title={item.id}
               color={item.color}
               media={item.media}
               keys={["value", "media"]}
