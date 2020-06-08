@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { ResponsiveBar } from "@nivo/bar";
 import { makeStyles } from "@material-ui/core/styles";
-import { formatToAbbreviation } from "../../utils";
+import { formatToAbbreviation, formatToUnits } from "../../utils";
 const useStyles = makeStyles(() => ({
   container: {
     height: "250px",
@@ -75,6 +75,7 @@ const MarkedBarChart = ({ data, keys, title, color, media }) => {
                 spacing: 10,
               },
             ]}
+            tooltipFormat={formatToUnits}
             borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
             axisTop={null}
             axisRight={null}

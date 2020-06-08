@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
-
+import { formatToUnits } from "../../utils";
 const margin = { top: 0, right: 0, bottom: 0, left: "5%" };
 
 const styles = {
@@ -37,26 +37,26 @@ const theme = {
     tickColor: "#eee",
     ticks: {
       line: {
-        stroke: "#555555",
+        stroke: "#555",
       },
       text: {
-        fill: "#ffffff",
+        fill: "#fff",
       },
     },
     legend: {
       text: {
-        fill: "#aaaaaa",
+        fill: "#aaa",
       },
     },
   },
   grid: {
     line: {
-      stroke: "#555555",
+      stroke: "#555",
     },
   },
 };
 
-const CircularProgressBar = ({ data, colors, text }) => {
+const CircularProgressBar = ({ data, colors, text, economic }) => {
   const getColor = (item) => colors[item.id];
 
   return (
@@ -66,6 +66,7 @@ const CircularProgressBar = ({ data, colors, text }) => {
         colors={getColor}
         innerRadius={0.8}
         enableRadialLabels={false}
+        tooltipFormat={economic ? formatToUnits : undefined}
         enableSlicesLabels={false}
         theme={theme}
       />

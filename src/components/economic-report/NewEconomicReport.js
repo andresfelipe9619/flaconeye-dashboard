@@ -72,6 +72,7 @@ export default function NewEconomicReport(props) {
                 <Card style={{ overflow: "visible" }} raised>
                   <CardContent>
                     <CircularProgressBar
+                      economic
                       colors={{ con: "#f44336", pro: "#4caf50" }}
                       data={[
                         {
