@@ -40,19 +40,15 @@ export default function TecnicReport(props) {
     "#ff9800",
   ];
   if (loading) return <LinearProgress />;
-  const totalExecuted = ((data || {}).mostExpensive || []).reduce(
-    (acc, item) => acc + item.value,
-    0
-  );
   return (
     <Grid container spacing={3}>
-      <Grid container spacing={6} item md={12}>
+      <Grid container spacing={4} item md={12}>
         {((data || {}).kpi || []).map(
           (
             { title, percentage, accumulated, currentValue, currentDate },
             index
           ) => (
-            <Grid container key={index} item md={4}>
+            <Grid container key={index} item md={3}>
               <EconomicCard
                 {...{
                   title,
@@ -77,7 +73,7 @@ export default function TecnicReport(props) {
             <TableCard data={(data || {}).mostExpensive} />
           </Grid>
           <Grid item md={12}>
-            <DividedCard below={totalExecuted} />
+            <DividedCard below={(data || {}).totalExecuted} />
           </Grid>
         </Grid>
       </Grid>
