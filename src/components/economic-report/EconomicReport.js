@@ -63,7 +63,7 @@ export default function TecnicReport(props) {
           )
         )}
       </Grid>
-      <TecnicChart data={(data || {}).lineData || []} />
+      <TecnicChart economic data={(data || {}).lineData || []} />
       <Grid container item md={12} alignItems="center" justify="center">
         <Grid item md={7}>
           <HorizontalBarChart data={(data || {}).barData} keys={barKeys} />
@@ -84,11 +84,16 @@ export default function TecnicReport(props) {
 const DividedCard = ({ below }) => (
   <Card raised>
     <CardContent>
-      <Typography align="center" variant="subtitle1" gutterBottom>
+      <Typography
+        align="center"
+        style={{ fontWeight: "bold" }}
+        variant="h6"
+        gutterBottom
+      >
         Ejecutado total
       </Typography>
       <Divider />
-      <Typography align="center" variant="subtitle2">
+      <Typography style={{ fontWeight: "bold" }} align="center" variant="h6">
         {formatToUnits(below, 0)}
       </Typography>
     </CardContent>
@@ -98,7 +103,12 @@ const DividedCard = ({ below }) => (
 const TableCard = ({ data }) => (
   <Card raised>
     <CardContent>
-      <Typography align="center" variant="h6" gutterBottom>
+      <Typography
+        align="center"
+        style={{ fontWeight: "bold" }}
+        variant="h6"
+        gutterBottom
+      >
         Ubicación más costosa
       </Typography>
       {(data || []).map(({ title, location, value }, index) => (

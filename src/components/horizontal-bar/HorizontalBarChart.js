@@ -28,7 +28,12 @@ const HorizontalBarChart = ({ data, keys }) => {
   return (
     <Card raised className={classes.card}>
       <div style={{ marginTop: "10px" }}>
-        <Typography variant="h5" component="h1" align="center">
+        <Typography
+          variant="h5"
+          style={{ fontWeight: "bold" }}
+          component="h2"
+          align="center"
+        >
           Gastos vs Contratado
         </Typography>
       </div>

@@ -78,7 +78,7 @@ export default function NewEconomicReport(props) {
                         {
                           id: "con",
                           label: conName,
-                          value: conCount,
+                          value: conCount - proCount,
                         },
                         {
                           id: "pro",

@@ -5,6 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { formatToUnits, formatToAbbreviation } from "../../utils";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles(() => ({
   bold: { fontWeight: "bold" },
 }));
 
-export default function TecnicChart({ style, data }) {
+export default function TecnicChart({ style, data, economic }) {
   const classes = useStyles();
 
   return (
@@ -37,13 +38,14 @@ export default function TecnicChart({ style, data }) {
             component="h2"
             align="center"
           >
-            Cantidad de Asistencias
+            {economic ? "Acumulado Monetario" : "Cantidad de Asistencias"}
           </Typography>
         </div>
         <CardContent>
           <Grid container className={classes.container}>
             <ResponsiveLine
               data={data}
+              tooltipFormat={economic ? formatToUnits : undefined}
               margin={{ top: 5, right: 110, bottom: 80, left: 60 }}
               xScale={{ type: "point" }}
               yScale={{
@@ -71,6 +73,7 @@ export default function TecnicChart({ style, data }) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
+                format: economic ? formatToAbbreviation : undefined,
                 legend: "",
                 legendOffset: -40,
                 legendPosition: "middle",
