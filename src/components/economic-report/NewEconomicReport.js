@@ -49,14 +49,7 @@ export default function NewEconomicReport(props) {
       <Grid container item md={7} spacing={1} justify="space-between">
         {((data || {}).pieData || []).map(
           (
-            {
-              proName,
-              conName,
-              pendingValue,
-              proPercentage = 0,
-              proCount = 0,
-              conCount = 0,
-            },
+            { proName, conName, proPercentage = 0, proCount = 0, conCount = 0 },
             index
           ) => (
             <Grid
@@ -76,14 +69,14 @@ export default function NewEconomicReport(props) {
                       colors={{ con: "#f44336", pro: "#4caf50" }}
                       data={[
                         {
-                          id: "con",
-                          label: conName,
-                          value: conCount - proCount,
-                        },
-                        {
                           id: "pro",
                           label: proName,
                           value: proCount,
+                        },
+                        {
+                          id: "con",
+                          label: conName,
+                          value: conCount,
                         },
                       ]}
                       text={`${proPercentage}%`}
@@ -93,7 +86,7 @@ export default function NewEconomicReport(props) {
               </Grid>
               <DividedCard
                 above={"Disponibilidad"}
-                below={formatToUnits(pendingValue)}
+                below={formatToUnits(conCount - proCount)}
                 hasNumber
               />
             </Grid>
