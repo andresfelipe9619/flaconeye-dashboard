@@ -38,7 +38,7 @@ export default function TecnicChart({ style, data, economic }) {
             component="h2"
             align="center"
           >
-            {economic ? "Acumulado Monetario" : "Cantidad de Asistencias"}
+            {economic ? "Acumulado Monetario" : "Asistencias"}
           </Typography>
         </div>
         <CardContent>
@@ -79,7 +79,7 @@ export default function TecnicChart({ style, data, economic }) {
                 legendPosition: "middle",
               }}
               colors={{ datum: "color" }}
-              enablePoints={true}
+              enablePoints={false}
               pointSize={10}
               pointColor={{ theme: "background" }}
               pointBorderWidth={2}
